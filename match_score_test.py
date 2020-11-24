@@ -13,6 +13,7 @@ max_score = 0
 moy_score = 0
 med_score = 0
 scores = []
+# on simule des matchs 10000 fois
 for i in range(NB_MATCHS):
     res = match.simulate("a", "b")
     scores.append(res["score"][0])
@@ -20,10 +21,12 @@ for i in range(NB_MATCHS):
     max_score = max(max_score, res["score"][0])
     max_score = max(max_score, res["score"][1])
 
+# on calcule la moyenne des scores
 for i in scores:
     moy_score += i
 moy_score /= NB_MATCHS * 2
 
+# on calcule la mediane des scores
 scores.sort() 
 mid = len(scores) // 2
 med_score = (scores[mid] + scores[~mid]) / 2

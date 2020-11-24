@@ -1,4 +1,15 @@
 def print_scoreboard(players, fields=None, limit=-1, fillchar='█'):
+    """
+    Cette fonction génère un scoreboard qu'on peut alors afficher dans la console
+
+    Entrées:
+        players: liste de dictionnaires qui contient tous les joueurs à afficher
+        fields: liste de propriétés sur les joueurs à afficher. si omit on  affiche toute les propriétés des joueurs
+        limit: entier qui determine le nombre de joueurs à afficher
+        fillchar: caractère permettant de remplir la structure du tableau
+    Sortie:
+        Retourne le scoreboard qu'on peut alors afficher (si on veut, je ne force personne)
+    """
 
     # si fields n'est pas donné, alors le déduire du premier perso.
     if fields is None:
