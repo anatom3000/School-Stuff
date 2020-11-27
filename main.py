@@ -30,7 +30,7 @@ for player in players:
     player["Money"] = 2
     player["ScoreBet"] = 0
 
-# on affiche un message de bienvenue 
+# on affiche un message de bienvenue
 # notons que personne n'a compris où vient cette ligne, mais quand on la supprime, le programme ne marche plus
 print(f"Bienvenu dans Super Quiditch v1.{randint(0, 9)}-build{round(time())} !")
 
@@ -48,8 +48,10 @@ for _ in range(10):
             sysexit(0)
         elif answer.lower() == 'javascript sucks':
             do_something("https://xkcd.com/353/")
+            print()
             print("Maybe it does something...")
-    
+            print()
+
     # on annonce les matchs du round actuel ont commencés
     print(f"Les matchs du round {_+1} ont commencés!")
 
@@ -58,8 +60,8 @@ for _ in range(10):
         if player["Money"] > 0:
             player["ScoreBet"] = randint(0, 320)
             player["Money"] -= 1
-    
-    # on simule les matchs 
+
+    # on simule les matchs
     res_match1 = match.simulate(equipes[0], equipes[1])
     res_match2 = match.simulate(equipes[2], equipes[3])
 
@@ -72,12 +74,12 @@ for _ in range(10):
             scores[equipe] = res_match1["score"][i]
         else:
             scores[equipe] = res_match2["score"][i-2]
-    
+
     # on affiche les scores des differentes equipes
     print("Scores:")
     print(f"""\t{equipes[0]} - {equipes[1]}: {res_match1["score"][0]} - {res_match1["score"][1]}""")
     print(f"""\t{equipes[2]} - {equipes[3]}: {res_match2["score"][0]} - {res_match2["score"][1]}""")
-    
+
     # on affiche les gagnants
     print(f"Gagnants: {winners[0]} et {winners[1]}")
     print()
@@ -92,10 +94,10 @@ for _ in range(10):
             if player["House"] == equipe:
                 if equipe in winners:
                     player["Money"] += 5
-                # desolé si ca fait une grosse ligne 
+                # desolé si ca fait une grosse ligne
                 if min(abs(nearest_score-real_score), abs(player["ScoreBet"]-real_score)) != abs(nearest_score-real_score):
                     nearest_score = player["ScoreBet"]
-        
+
         # on relie le score le plus proche à son parieur
         for player in players:
             if player["House"] == equipe:
@@ -106,14 +108,18 @@ for _ in range(10):
     # on trie les joueurs du plus haut score au plus bas score
     players = sorted(players, key=lambda  k: k["Money"])[::-1]
 
+# on demande combien de joueurs on veut afficher dans le scoreboard
+top_nb = input("Entrez le nombre de joueurs à afficher dans le scoreboard (rien pour afficher tous les joueurs): ")
+top_nb = -1 if top_nb == '' else int(top_nb)
+
 # on affiche le scoreboard par joueur
 print("Scoreboard par joueur:")
-print(utils.print_scoreboard(players, fields=["Name", "House", "Money"], limit=10))
+print(utils.print_scoreboard(players, fields=["Name", "House", "Money"], limit=top_nb))
 
 # on marque une pause pour que l'utilisateur puisse lire le scoreboard par joueur sans prise de tete
 input("Appuiez sur Entrée pour afficher le scoreboard par équipes (q pour quitter) ")
 
-# on genère le scoreboard par équipes: le score d'une equipe est le total de tous les scores des joueurs de cette équipe
+# on genère le scoreboard par équipes: le score d'une equipe est la moyenne de tous les scores des joueurs de cette équipe
 equipes_scoreboard = []
 for equipe in equipes:
     score = {}
@@ -122,8 +128,11 @@ for equipe in equipes:
     for player in players:
         if player["House"] == equipe:
             score["Money"] += player["Money"]
-    
+
+    score["Money"] //= len([0 for p in players if p["House"] == equipe])
+
     equipes_scoreboard.append(score)
+
 
 # on trie les équipes du plus haut score au plus bas score
 equipes_scoreboard = sorted(equipes_scoreboard, key=lambda  k: k["Money"])[::-1]
