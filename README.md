@@ -1,2 +1,2 @@
 # Super-Quiditch-NSI
-Pour utiliser le programme, executer `main.py`.
+Ce repo contient tous les projets faits en classe de NSI de 1^è
