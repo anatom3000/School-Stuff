@@ -1,0 +1,19 @@
+Entrées:
+    sysmoney (liste): système de monnaie utilisé par le commercant
+    caisse (dictionnaire): contenu de la caisse du commercant
+
+nb_billets <- DICTIONNAIRE VIDE
+POUR billet DANS sysmoney
+    resultat <- divmod(monnaie, billet)
+    SI caisse[billet] > resultat[0]
+        nb_billets[billet] <- resultat[0]
+        monnaie <- resultat[1]
+    FIN SI
+    SINON
+        nb_billets[billet] <- caisse[billet]
+        monnaie <- monnaie - caisse[billet]*billet
+    FIN SINON
+FIN POUR
+
+Sorties:
+    nb_billets (dictionnaire): contient le nombre de billets pour chaque type (
