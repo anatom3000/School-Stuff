@@ -3,7 +3,7 @@
 '''
 Mini-projet "Harry se fait la malle"
 
-Liste de fournitures scolaires 
+Liste de fournitures scolaires
 
 Auteur : David Landry
 '''
@@ -21,3 +21,11 @@ fournitures_scolaires = [{'Nom' : 'Manuel scolaire', 'Poids' : 0.6, 'Mana' : 11}
 ]
 
 poids_maximal = 4
+
+# partie A - n'importe comment
+
+
+
+# partie B - plus lourd possible
+
+# partie C - plus de mana possible
