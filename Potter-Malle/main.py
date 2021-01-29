@@ -28,4 +28,17 @@ poids_maximal = 4
 
 # partie B - plus lourd possible
 
+def partieB(fourn, max_poids):
+
+    fourn.sort(key=itemgetter('Poids'), reversed=True)
+    mis_dans_malle = []
+    for f in fourn:
+        poids_total = 0
+        for i in mis_dans_malle:
+            poids_total += i["Poids"]
+        if f['poids'] + poids_total < max_poids:
+            mis_dans_malle.append(f)
+
+    return mis_dans_malle
+
 # partie C - plus de mana possible
