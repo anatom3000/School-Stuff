@@ -2,9 +2,7 @@
 
 '''
 Mini-projet "Harry se fait la malle"
-
 Liste de fournitures scolaires
-
 Auteur : David Landry
 '''
 
@@ -31,10 +29,27 @@ def sort_mais_pas_celui_de_la_bibliotheque_standard(data, key=lambda x: x, rever
         data[i], data[mini] = data[mini], data[i]
     return data
 
-# partie A - n'importe comment
 
-def partieA(fourn, max_poids):
+"""
+Pseudo-code de partieABC:
+DEFINIR partieABC(fourn, max_poids):
+    mis_dans_malle <- tableau vide
+    POUR f DANS fourn:
+        poids_total <- 0
+        POUR i DANS mis_dans_malle:
+            poids_total <- poids_total + i["Poids"]
+        FIN_POUR
+        SI f['Poids'] + poids_total PLUS PETIT QUE max_poids:
+            AJOUTER f A mis_dans_malle 
+        FIN_SI
+    FIN_POUR
 
+    RETOURNER mis_dans_malle
+FIN_DEFINIR
+"""
+def partieABC(fourn, max_poids, priorite=lambda x: x):
+
+    fourn = sort_mais_pas_celui_de_la_bibliotheque_standard(fourn, key=priorite, reverse=True)
     mis_dans_malle = []
     for f in fourn:
         poids_total = 0
@@ -45,41 +60,7 @@ def partieA(fourn, max_poids):
 
     return mis_dans_malle
 
+partieABC(fournitures_scolaires, poids_maximal)                                # partie A
+partieABC(fournitures_scolaires, poids_maximal, priorite=lambda x: x["Poids"]) # partie B
+partieABC(fournitures_scolaires, poids_maximal, priorite=lambda x: x["Mana"] ) # partie C
 
-# partie B - plus lourd possible
-
-def partieB(fourn, max_poids):
-
-    fourn = sort_mais_pas_celui_de_la_bibliotheque_standard(fourn, key=lambda x: x["Poids"], reverse=True)
-    mis_dans_malle = []
-    for f in fourn:
-        poids_total = 0
-        for i in mis_dans_malle:
-            poids_total += i["Poids"]
-        if f['Poids'] + poids_total < max_poids:
-            mis_dans_malle.append(f)
-
-    return mis_dans_malle
-
-
-
-# partie C - plus de mana possible
-
-def partieC(fourn, max_poids):
-
-    fourn = sort_mais_pas_celui_de_la_bibliotheque_standard(fourn, key=lambda x: x["Mana"], reverse=True)
-    mis_dans_malle = []
-    for f in fourn:
-        poids_total = 0
-        for i in mis_dans_malle:
-            poids_total += i["Poids"]
-        if f['Poids'] + poids_total < max_poids:
-            mis_dans_malle.append(f)
-
-    return mis_dans_malle
-
-print(partieA(fournitures_scolaires, poids_maximal))
-print()
-print(partieB(fournitures_scolaires, poids_maximal))
-print()
-print(partieC(fournitures_scolaires, poids_maximal))
