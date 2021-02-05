@@ -20,7 +20,7 @@ fournitures_scolaires = [{'Nom' : 'Manuel scolaire', 'Poids' : 0.6, 'Mana' : 11}
 
 poids_maximal = 4
 
-def sort_mais_pas_celui_de_la_bibliotheque_standard(data, key=lambda x: x, reverse=False):
+def tri(data, key=lambda x: x, reverse=False):
     for i in range(len(data) - 1):
         mini = i
         for j in range(i + 1, len(data)):
@@ -32,9 +32,9 @@ def sort_mais_pas_celui_de_la_bibliotheque_standard(data, key=lambda x: x, rever
 
 """
 Pseudo-code de partieABC:
-DEFINIR partieABC(fourn, max_poids):
+DEFINIR partieABC(fournitures, max_poids):
     mis_dans_malle <- tableau vide
-    POUR f DANS fourn:
+    POUR f DANS fournitures:
         poids_total <- 0
         POUR i DANS mis_dans_malle:
             poids_total <- poids_total + i["Poids"]
@@ -47,11 +47,11 @@ DEFINIR partieABC(fourn, max_poids):
     RETOURNER mis_dans_malle
 FIN_DEFINIR
 """
-def partieABC(fourn, max_poids, priorite=lambda x: x):
+def partieABC(fournitures, max_poids, priorite=lambda x: x):
 
-    fourn = sort_mais_pas_celui_de_la_bibliotheque_standard(fourn, key=priorite, reverse=True)
+    fournitures = tri(fournitures, key=priorite, reverse=True)
     mis_dans_malle = []
-    for f in fourn:
+    for f in fournitures:
         poids_total = 0
         for i in mis_dans_malle:
             poids_total += i["Poids"]
@@ -63,4 +63,3 @@ def partieABC(fourn, max_poids, priorite=lambda x: x):
 partieABC(fournitures_scolaires, poids_maximal)                                # partie A
 partieABC(fournitures_scolaires, poids_maximal, priorite=lambda x: x["Poids"]) # partie B
 partieABC(fournitures_scolaires, poids_maximal, priorite=lambda x: x["Mana"] ) # partie C
-
