@@ -22,23 +22,64 @@ fournitures_scolaires = [{'Nom' : 'Manuel scolaire', 'Poids' : 0.6, 'Mana' : 11}
 
 poids_maximal = 4
 
+def sort_mais_pas_celui_de_la_bibliotheque_standard(data, key=lambda x: x, reverse=False):
+    for i in range(len(data) - 1):
+        mini = i
+        for j in range(i + 1, len(data)):
+            if key(data[j]) < key(tab[mini]):
+                mini = j
+        data[i], data[mini] = data[mini], data[i]
+    return data
+
 # partie A - n'importe comment
 
+def partieA(fourn, max_poids):
+
+    mis_dans_malle = []
+    for f in fourn:
+        poids_total = 0
+        for i in mis_dans_malle:
+            poids_total += i["Poids"]
+        if f['Poids'] + poids_total < max_poids:
+            mis_dans_malle.append(f)
+
+    return mis_dans_malle
 
 
 # partie B - plus lourd possible
 
 def partieB(fourn, max_poids):
 
-    fourn.sort(key=itemgetter('Poids'), reversed=True)
+    fourn = sort_mais_pas_celui_de_la_bibliotheque_standard(fourn, key=lambda x: x["Poids"], reverse=True)
     mis_dans_malle = []
     for f in fourn:
         poids_total = 0
         for i in mis_dans_malle:
             poids_total += i["Poids"]
-        if f['poids'] + poids_total < max_poids:
+        if f['Poids'] + poids_total < max_poids:
             mis_dans_malle.append(f)
 
     return mis_dans_malle
 
+
+
 # partie C - plus de mana possible
+
+def partieC(fourn, max_poids):
+
+    fourn = sort_mais_pas_celui_de_la_bibliotheque_standard(fourn, key=lambda x: x["Mana"], reverse=True)
+    mis_dans_malle = []
+    for f in fourn:
+        poids_total = 0
+        for i in mis_dans_malle:
+            poids_total += i["Poids"]
+        if f['Poids'] + poids_total < max_poids:
+            mis_dans_malle.append(f)
+
+    return mis_dans_malle
+
+print(partieA(fournitures_scolaires, poids_maximal))
+print()
+print(partieB(fournitures_scolaires, poids_maximal))
+print()
+print(partieC(fournitures_scolaires, poids_maximal))
