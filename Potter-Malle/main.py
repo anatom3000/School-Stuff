@@ -80,7 +80,13 @@ FIN_DEFINIR
 """
 def partieABC(fournitures, max_poids, priorite=None):
     """
-    
+    Cette fonction remplit la valise.
+    Entrées:
+        fournitures: liste de dictionnaires représentants les objets disponibles
+        max_poids: le poids maximum que la malle peut supporter
+        priorite: permet de definir un ordre de priorité (càd quelle valeur totale on veut maximiser lors du remplissage de la malle
+    Sorties:
+        mis_dans_malle: liste de dictionnaires réprésentants les objets mis dans la malle
     """
 
     if priorite is not None:
