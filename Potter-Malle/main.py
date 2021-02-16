@@ -61,23 +61,6 @@ def tri(data, key=lambda x: x, reverse=False):
     return data[::-1] if reverse else data
 
 
-"""
-Pseudo-code de partieABC:
-DEFINIR partieABC(fournitures, max_poids):
-    mis_dans_malle <- tableau vide
-    POUR f DANS fournitures:
-        poids_total <- 0
-        POUR i DANS mis_dans_malle:
-            poids_total <- poids_total + i["Poids"]
-        FIN_POUR
-        SI f['Poids'] + poids_total PLUS PETIT QUE max_poids:
-            AJOUTER f A mis_dans_malle 
-        FIN_SI
-    FIN_POUR
-
-    RETOURNER mis_dans_malle
-FIN_DEFINIR
-"""
 def partieABC(fournitures, max_poids, priorite=None):
     """
     Cette fonction remplit la valise.
