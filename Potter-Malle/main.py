@@ -7,6 +7,11 @@ Auteur : David Landry
 '''
 
 def print_results(data):
+    """
+    Permet d'afficher dans la console de manière élégante les résultats des algos.
+    Entrées: 
+        data: liste de dictionnaires
+    """
     poids = 0
     for k, v in enumerate(data):
         print(f"### Objet n°{k+1} ###")
@@ -38,13 +43,22 @@ fournitures_scolaires = [
 poids_maximal = 4
 
 def tri(data, key=lambda x: x, reverse=False):
+    """
+    Fonction de tri universelle, reproduisant le comportement de la méthode list.sort() de la bibliotheque standard.
+    Entrées:
+        data: liste contenant les données à trier
+        key: fonction (lamdba ou non) qui permet de personnaliser le tri
+        reverse: booleen determinant si on trie du plus grand ou du plus petit
+    Sorties:
+        data: liste triée
+    """
     for i in range(len(data) - 1):
         mini = i
         for j in range(i + 1, len(data)):
             if key(data[j]) < key(data[mini]):
                 mini = j
         data[i], data[mini] = data[mini], data[i]
-    return data
+    return data[::-1] if reverse else data
 
 
 """
@@ -65,6 +79,9 @@ DEFINIR partieABC(fournitures, max_poids):
 FIN_DEFINIR
 """
 def partieABC(fournitures, max_poids, priorite=None):
+    """
+    
+    """
 
     if priorite is not None:
         fournitures = tri(fournitures, key=priorite, reverse=True)
